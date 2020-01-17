@@ -1,0 +1,98 @@
+docker-machine ls
+
+Pull --- List images ---- run command---
+docker pull rabbitmq
+docker images
+docker run image_id
+docker ps ---lists the container running image
+
+Instead of pulling you can run it in interactive mode that downloads the image and run for you.
+
+
+docker tag 6addf4b6a4ef rabbitmq:2
+docker tag rabbitmq rabbitmq-latest
+$ docker rmi rabbitmq-latest
+docker rmi rabbitmq:2
+Detached (-d)
+To start a container in detached mode, you use -d=true or just -d option. By design, containers started in detached mode exit when the root process used to run the container exits, unless you also specify the --rm option. If you use -d with --rm, the container is removed when it exits or when the daemon exits, whichever happens first.
+
+Do not pass a service x start command to a detached container. For example, this command attempts to start the nginx service.
+
+$ docker run -d -p 80:80 my_image service nginx start
+This succeeds in starting the nginx service inside the container. However, it fails the detached container paradigm in that, the root process (service nginx start) returns and the detached container stops as designed. As a result, the nginx service is started but could not be used. Instead, to start a process such as the nginx web server do the following:
+
+$ docker run -d -p 80:80 my_image nginx -g 'daemon off;'
+
+docker ps -a
+docker stop container_id
+
+docker search db2
+ docker run -it 6addf4b6a4ef /bin/bash --- creates interactive terminal or pseudo terminal for us, allows us to connect to actual rabbit container
+running from this docker image.
+
+docker stop container_id
+docker rm container_id
+
+docker run -it rabbitmq:management  /bin/bash
+
+Remove the container using docker rm and image using docker rmi
+
+Installing and running rabbitmq docker image---
+
+docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 rabbitmq:3-management  
+
+Docker run to run the image which starts the image downloaded in container which then you can start and stop.
+
+To get the container IP --
+docker inspect --format '{{ .NetworkSettings.IPAddress }}' 067972585ece [last param is container ID] to start the rabbit in local
+using ip:15672
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' container_name_or_id
+
+
+Running a command in running container
+docker exec -ti 067972585ece   /bin/bash
+docker exec -ti 067972585ece   bash
+docker exec -ti thirsty_bassi{container_name}   bash
+
+
+DockerFile---
+
+text file ---instrunctions to create your own images (automation of image creation)---using build 
+touch DockerFile ---create file
+-----------------------
+#Getting base image (ubuntu)
+FROM ubuntu(base image)
+OR 
+FROM SCRATCH (to build image from scratch completely)  
+
+MAINTAINER nilesh jo <njorwar@gmail.com> (optional)
+
+RUN apt-get update (executed during building of image)
+
+CMD ["echo" , "Hello world"] (executed when container gets created) 
+
+--------------------
+
+docker build 
+docker build -t imageName:tag directoryOfDockerFile
+docker run image
+
+Docker Ports
+docker port container_id
+
+
+
+----------------
+Create the image locally by runnig dockerfile
+----- tag the build using docker build -t rabbit:latestversion . (make sure you have kept the local file in same directory where you are running dockerfile.)
+----- check the images if built ---- docker images
+----- to push it to repository first login ---- docker login -u "nileshjorwar" -p "aaiBaba@93" docker.io
+----- Once logged in successfully, push the image --- docker push image_name:tag
+----- Denied access
+----- Change the tag of image ---- docker tag image_name username/image_name:tag
+----- docker tag rabbit-local nileshjorwar/rabbit-local:1.0.0
+----- docker push nileshjorwar/rabbit-local
+-----------------
+
+docker-machine env
+apk 
