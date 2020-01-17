@@ -39,7 +39,7 @@ Remove the container using docker rm and image using docker rmi
 
 Installing and running rabbitmq docker image---
 
-docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 rabbitmq:3-management  
+docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 rabbitmq:3-management
 
 Docker run to run the image which starts the image downloaded in container which then you can start and stop.
 
@@ -54,34 +54,33 @@ docker exec -ti 067972585ece   /bin/bash
 docker exec -ti 067972585ece   bash
 docker exec -ti thirsty_bassi{container_name}   bash
 
-
+------------------------------------------------------------------------
 DockerFile---
 
-text file ---instrunctions to create your own images (automation of image creation)---using build 
+text file ---instructions to create your own images (automation of image creation)---using build
 touch DockerFile ---create file
+    ``
+    FROM
+    RUN
+    CMD
+    ``
+dockerFile ----> docker build ----> docker image
 -----------------------
 #Getting base image (ubuntu)
 FROM ubuntu(base image)
-OR 
-FROM SCRATCH (to build image from scratch completely)  
+OR
+FROM SCRATCH (to build image from scratch completely)
 
-MAINTAINER nilesh jo <njorwar@gmail.com> (optional)
+MAINTAINER nilesh jorwar <njorwar@gmail.com> (optional)
 
 RUN apt-get update (executed during building of image)
 
-CMD ["echo" , "Hello world"] (executed when container gets created) 
+CMD ["echo" , "Hello world"] (executed when container gets created)
 
 --------------------
-
-docker build 
+docker build
 docker build -t imageName:tag directoryOfDockerFile
 docker run image
-
-Docker Ports
-docker port container_id
-
-
-
 ----------------
 Create the image locally by runnig dockerfile
 ----- tag the build using docker build -t rabbit:latestversion . (make sure you have kept the local file in same directory where you are running dockerfile.)
@@ -92,7 +91,35 @@ Create the image locally by runnig dockerfile
 ----- Change the tag of image ---- docker tag image_name username/image_name:tag
 ----- docker tag rabbit-local nileshjorwar/rabbit-local:1.0.0
 ----- docker push nileshjorwar/rabbit-local
------------------
+------------------------------------------------------------------------
 
+Docker Ports
+docker port container_id
 docker-machine env
-apk 
+apk
+------------------------
+Issues -
+standard_init_linux.go:211: exec user process caused "no such file or directory"
+while building the image locally using dockerfile.
+resolution --- open the dockerfile and script.sh file in notepad ++ and goto - EDIT--EOL COnversion---Select LF (unix)
+-----------------------
+docker cmd vs entrypoint
+docker cmd use in Dockerfile ---CMD ["command", "param"]
+ex- CMD ["sleep" "5"]
+
+when runs the container, running the container and appending the command sleep 5 at the end
+ex -- docker run container_id
+which becomes after running
+ex -- docker run container_id sleep 5
+
+docker entrypoint use in Dockerfile --- ENTRYPOINT ["command"]
+ex- ENTRYPOINT ["sleep"]
+when running in the container, appends at the end of container id but have to specify what param to append
+ex - docker run container_id 'param'
+(param should be added) or error will occur
+---------------------------------------------------------------------------------
+docker-compose
+a tool for defining and running multi-container docker applications
+use of yaml files for configuration -docker-compose.yml
+start and stop all services using docker compose up/down
+docker-compose is installed as a part of docker toolbox

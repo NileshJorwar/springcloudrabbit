@@ -3,5 +3,5 @@ FROM rabbitmq
 
 MAINTAINER nilesh Jorwar
 
-CMD ["ap-get install telnet"]
+CMD ["ls"]
 
