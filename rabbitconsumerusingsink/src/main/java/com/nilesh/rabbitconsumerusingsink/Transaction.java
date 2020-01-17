@@ -1,6 +1,4 @@
 package com.nilesh.rabbitconsumerusingsink;
-
-
 public class Transaction {
     int id;
     String name;
@@ -47,5 +45,9 @@ public class Transaction {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+    public String toString()
+    {
+        return "Id--" + id + " name-"+name+ " age-"+ age+ " address--"+address;
     }
 }

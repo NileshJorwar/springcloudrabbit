@@ -48,4 +48,9 @@ public class Transaction {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    public String toString()
+    {
+        return "Id--" + id + " name-"+name+ " age-"+ age+ " address--"+address;
+    }
 }

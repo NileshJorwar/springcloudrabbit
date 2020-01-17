@@ -10,6 +10,6 @@ public class MessageConsumer {
     @StreamListener(Sink.INPUT)
     public void consume(Transaction transaction)
     {
-        System.out.println("Consumed Message---"+transaction.getName());
+        System.out.println("Consumed Message---"+transaction);
     }
 }
