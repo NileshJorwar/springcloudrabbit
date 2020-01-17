@@ -119,7 +119,16 @@ ex - docker run container_id 'param'
 (param should be added) or error will occur
 ---------------------------------------------------------------------------------
 docker-compose
-a tool for defining and running multi-container docker applications
-use of yaml files for configuration -docker-compose.yml
-start and stop all services using docker compose up/down
-docker-compose is installed as a part of docker toolbox
+1. a tool for defining and running multi-container docker applications
+2. use of yaml files for configuration -docker-compose.yml
+3. start and stop all services using docker compose up/down
+4. docker-compose is installed as a part of docker toolbox
+5. Create the docker-compose.yml file
+6. Run the docker-compose config to see if the file created is proper or not (checking its validity)
+        ERROR: The Compose file '.\docker-compose.yml' is invalid because:
+        Unsupported config option for services: 'database'
+        Add version:'3' to the docker-compose.yml file.
+7. Run the docker-compose up/down -d to create/run the container for the images defined in yaml file.
+8. To scale up the services we can, docker-compose up -d --scale service_name=4
+   ex-  docker-compose up -d --scale database=4
+
