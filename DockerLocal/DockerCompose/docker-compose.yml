@@ -1,7 +1,11 @@
 version: '3'
 services:
   web:
+    container_name: local_nginx
     image: nginx
+#    build:
+#      context: nginx
+    privileged: true
     ports:
     - 9090:80
   database:

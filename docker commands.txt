@@ -81,7 +81,7 @@ RUN apt-get update (executed during building of image)
 CMD ["echo" , "Hello world"] (executed when container gets created)
 
 --------------------
-docker build
+docker build .
 docker build -t imageName:tag directoryOfDockerFile
 docker run image
 ----------------
