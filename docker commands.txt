@@ -65,6 +65,9 @@ touch DockerFile ---create file
     CMD
     ``
 dockerFile ----> docker build ----> docker image
+To run the docker file from the same directory where
+docker build .
+
 -----------------------
 #Getting base image (ubuntu)
 FROM ubuntu(base image)
