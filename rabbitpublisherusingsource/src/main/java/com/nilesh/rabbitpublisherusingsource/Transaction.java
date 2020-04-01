@@ -8,8 +8,8 @@ public class Transaction {
     String address;
     public Transaction()
     {
-
     }
+
     public Transaction(int id, String name, int age, String address) {
         this.id = id;
         this.name = name;

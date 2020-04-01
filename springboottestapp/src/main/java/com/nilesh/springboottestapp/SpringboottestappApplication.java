@@ -2,11 +2,10 @@ package com.nilesh.springboottestapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
-//@EnableJpaRepositories(basePackageClasses = "com.nilesh.springboottestapp")
 @SpringBootApplication
+@EnableScheduling
 public class SpringboottestappApplication {
     public static void main(String[] args) {
         SpringApplication.run(SpringboottestappApplication.class, args);

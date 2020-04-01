@@ -9,4 +9,5 @@ public interface ConsumerChannels {
 
     @Input("consumer")
     SubscribableChannel producerChannel();
+
 }

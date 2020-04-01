@@ -2,22 +2,19 @@ package com.nilesh.springboottestapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
-@RequestMapping("/testapi/nilesh/")
+@RequestMapping("testapi/nilesh/")
 public class Controller {
 
-    @Autowired
-    Repository repository;
-    List<Model> employees = new ArrayList<>();
-    @GetMapping ("/all")
-    public List<Model> findAll()
+    @GetMapping ("all")
+    public void findAll(Integer age, Integer id, String name)
     {
-        return repository.findAll();
+//        return age + " "+ id + " "+ name;
+        System.out.println("Hi" + age+ id + name);
     }
+
 }
