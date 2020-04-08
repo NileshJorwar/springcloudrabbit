@@ -2,14 +2,14 @@
 1. Make sure you have added - 
     <spring-cloud.version>Hoxton.SR1</spring-cloud.version>
 2. Make sure you added 
-        <dependency>
+        ``` <dependency>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-stream-rabbit</artifactId>
-        </dependency>
+        </dependency> ```
 
 3. Create the controller and run the program, it runs.
 4. Create the Interface ProducerChannel and Define the MessageChannel with @Output annotation.
