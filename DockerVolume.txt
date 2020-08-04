@@ -1,0 +1,81 @@
+Docker Volume
+
+docker volume create my-vol
+docker volume ls
+docker volume inspect my-vol
+docker volume rm my-vol
+
+----------------------------------------
+Start a container with a volume ---  
+	docker run -d \
+  --name devtest \
+  -v myvol2:/app \
+  nginx:latest
+ docker inspect devtest
+ 
+Stop the container and remove the volume. Note volume removal is a separate step.
+	$ docker container stop devtest
+
+	$ docker container rm devtest
+
+	$ docker volume rm myvol2
+----------------------------------------	
+Populate a volume using a container --
+	docker run -d \
+  --name=nginxtest \
+  -v nginx-vol:/usr/share/nginx/html \
+  nginx:latest
+
+After running either of these examples, run the following commands to clean up the containers and volumes. Note volume removal is a separate step.
+  
+  $ docker container stop nginxtest
+
+$ docker container rm nginxtest
+
+$ docker volume rm nginx-vol
+
+
+-----------------
+creating second instance of postgres
+Create docker volume:
+
+docker volume create pgdatadev
+docker volume inspect pgdatadev
+
+
+
+Then run:
+
+docker run -p 3334:5432 -d --name postgres_tomw2 -e POSTGRES_PASSWORD=devuser -e POSTGRES_USER=devuser -e POSTGRES_DB=dev -v pgdatadev:/var/lib/postgresql/data postgres
+
+docker run -p 3334:5432 -d --name <IMAGE_NAME> -e POSTGRES_PASSWORD=<PASSWORD>-e POSTGRES_USER=<USER> -e POSTGRES_DB=<DATABASE> -v <VOLUME>:/var/lib/postgresql/data postgres
+
+where
+
+IMAGE_NAME is image name, can be anything (see notes below)
+
+PASSWORD and USER are desired database user name and password
+
+DATABASE is database name
+
+VOLUME is the volume created in first step.
+
+To stop the docker image from running do:
+
+docker ps | grep tomw
+
+it displays:
+bb5edfa0760b postgres "docker-entrypoint..." 10 minutes ago Up 10 minutes 0.0.0.0:3334→5432/tcp
+
+
+
+copy the magic string on the right hand site and do:
+
+docker kill bb5edfa0760b 
+
+if you try to run another docker command with name postgres_tomw2  it will throw error that this name is already taken. To free it you need to delete the corresponding image
+
+When you try to run it it will return an error that the image name is already taken by ..., followed by long string identifier. Copy this identifier and do:
+
+docker rm b7d80f2cc6bcd567e17b37f887e02e2418aff246ede47725b6b8d0520fd50449
+----------------------------------------
